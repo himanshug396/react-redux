@@ -1,0 +1,26 @@
+.App {
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 70px;
+}
+.Navigation{
+  background-color: #222;
+  color:white;
+  height: 70px;
+}
+.HomeSliderImages{;
+  height:90vh;
+  width: 100%;
+  object-fit: cover;
+}
+.Footer{
+  background-color: #ddd;
+  height:25px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
