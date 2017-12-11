@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import  image1 from './img/image1.jpg';
 import './App.css';
-import Navbar from './components/navbar';
+import NavigationMenu from './components/navbar';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <NavigationMenu />
         <div className="SliderHome">
           <img src={image1} className="HomeSliderImages" />
         </div>
