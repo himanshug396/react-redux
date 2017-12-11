@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import  image1 from './img/image1.jpg';
 import './App.css';
+import Navbar from './components/navbar';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Navigation">
-            <span>
-              <img src={logo} className="App-logo" alt="logo" />
-            </span>
-            <span>  // OptionsHeader
-            </span>
-        </div>
+        <Navbar />
         <div className="SliderHome">
           <img src={image1} className="HomeSliderImages" />
         </div>
