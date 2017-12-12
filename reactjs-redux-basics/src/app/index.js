@@ -1,31 +1,11 @@
-import React from "react";
+import React from 'react';
 import {render} from "react-dom";
+import App from './container/App';
+import { Provider} from 'react-redux';
+import store from './store'
 
-import { User } from './components/User';
-import { Main } from './components/Main';
-
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            username: "Max"
-        };
-    }
-
-    changeUsername(newName) {
-        this.setState({
-            username: newName
-        });
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <Main changeUsername={this.changeUsername.bind(this)}/>
-                <User username={this.state.username}/>
-            </div>
-        );
-    }
-}
-
-render(<App />, window.document.getElementById('app'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , window.document.getElementById('app'));
