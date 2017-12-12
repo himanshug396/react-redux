@@ -1,41 +1,15 @@
-// import React from "react";
-// import {render} from "react-dom";
-//
-// import { User } from './components/User';
-// import { Main } from './components/Main';
-//
-// class App extends React.Component {
-//     constructor() {
-//         super();
-//         this.state = {
-//             username: "Max"
-//         };
-//     }
-//
-//     changeUsername(newName) {
-//         this.setState({
-//             username: newName
-//         });
-//     }
-//
-//     render() {
-//         return (
-//             <div className="container">
-//                 <Main changeUsername={this.changeUsername.bind(this)}/>
-//                 <User username={this.state.username}/>
-//             </div>
-//         );
-//     }
-// }
-//
-// render(<App />, window.document.getElementById('app'));
-
-import { createStore} from 'redux';
+import React from 'react';
+import {render} from "react-dom";
+import { createStore, applyMiddleware} from 'redux';
+import {createLogger} from 'redux-logger';
+import {App} from './components/App';
+import { Provider} from 'react-redux';
 
 const initialState = {
   result : 1,
   last : []
 }
+
 const reducer = (state = initialState, action) => {     //state and action are passed automatically from the redux
     switch (action.type) {
       case "ADD":
@@ -46,27 +20,24 @@ const reducer = (state = initialState, action) => {     //state and action are p
         }
         break;
       case "SUB":
-        state =  action.payload - state;
         break;
     }
     return state;
 };
-const store = createStore(reducer);
+
+const logger = createLogger();
+const store = createStore(reducer, applyMiddleware(logger));
 
 store.subscribe(()=> {
-    console.log('Store updated', store.getState());
+    // console.log('Store updated', store.getState());
 });
 
 store.dispatch({
-  type : 'ADD',
-  payload:1,
+  type:'ADD',
+  payload: 10
 });
-store.dispatch({
-  type : 'ADD',
-  payload:1,
-});
-
-store.dispatch({
-  type : 'SUB',
-  payload:10,
-});
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , window.document.getElementById('app'));
