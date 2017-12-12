@@ -1,31 +1,72 @@
-import React from "react";
-import {render} from "react-dom";
+// import React from "react";
+// import {render} from "react-dom";
+//
+// import { User } from './components/User';
+// import { Main } from './components/Main';
+//
+// class App extends React.Component {
+//     constructor() {
+//         super();
+//         this.state = {
+//             username: "Max"
+//         };
+//     }
+//
+//     changeUsername(newName) {
+//         this.setState({
+//             username: newName
+//         });
+//     }
+//
+//     render() {
+//         return (
+//             <div className="container">
+//                 <Main changeUsername={this.changeUsername.bind(this)}/>
+//                 <User username={this.state.username}/>
+//             </div>
+//         );
+//     }
+// }
+//
+// render(<App />, window.document.getElementById('app'));
 
-import { User } from './components/User';
-import { Main } from './components/Main';
+import { createStore} from 'redux';
 
-class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            username: "Max"
-        };
-    }
-
-    changeUsername(newName) {
-        this.setState({
-            username: newName
-        });
-    }
-
-    render() {
-        return (
-            <div className="container">
-                <Main changeUsername={this.changeUsername.bind(this)}/>
-                <User username={this.state.username}/>
-            </div>
-        );
-    }
+const initialState = {
+  result : 1,
+  last : []
 }
+const reducer = (state = initialState, action) => {     //state and action are passed automatically from the redux
+    switch (action.type) {
+      case "ADD":
+        state = {
+          ...state,
+          result: state.result  + action.payload,
+          last : [...state.last, action.payload]
+        }
+        break;
+      case "SUB":
+        state =  action.payload - state;
+        break;
+    }
+    return state;
+};
+const store = createStore(reducer);
 
-render(<App />, window.document.getElementById('app'));
+store.subscribe(()=> {
+    console.log('Store updated', store.getState());
+});
+
+store.dispatch({
+  type : 'ADD',
+  payload:1,
+});
+store.dispatch({
+  type : 'ADD',
+  payload:1,
+});
+
+store.dispatch({
+  type : 'SUB',
+  payload:10,
+});
